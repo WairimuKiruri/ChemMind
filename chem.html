@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MO Diagram · Homoatomic Molecules · Valence Electrons · O₂ Paramagnetic</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f7 0%, #cfdae6 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 25px;
+        }
+
+        .mo-container {
+            max-width: 1500px;
+            width: 100%;
+            background: #fffffffa;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.35);
+            padding: 1.2rem 1.8rem 2rem 1.8rem;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #cbdae9;
+        }
+        h1 {
+            font-size: 1.4rem;
+            margin: 0;
+            background: linear-gradient(135deg, #1f3a5f, #2a5f8a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        select, button, input {
+            background: white;
+            border: 1px solid #b8c6d8;
+            border-radius: 60px;
+            padding: 7px 18px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        button { background: #eef3fc; }
+        button:hover, select:hover {
+            background: #e0e8f2;
+            border-color: #5f7fa0;
+            transform: scale(0.97);
+        }
+        .speed-label {
+            background: #e2eaf3;
+            padding: 5px 14px;
+            border-radius: 32px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .three-columns {
+            display: flex;
+            gap: 1.2rem;
+            margin: 1rem 0 1.2rem;
+            align-items: stretch;
+        }
+        .col {
+            flex: 1;
+            background: #fefef9;
+            border-radius: 1.5rem;
+            padding: 1rem 0.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .col h3 {
+            text-align: center;
+            margin: 0 0 1rem 0;
+            font-weight: 650;
+            color: #1f4970;
+            border-left: 5px solid #4d7ca1;
+            padding-left: 12px;
+        }
+        
+        .ao-list-reverse, .mo-list-reverse {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 12px;
+            margin-top: 5px;
+        }
+        
+        .ao-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 5px 8px;
+            border-radius: 40px;
+            background: #ffffff;
+            min-height: 58px;
+        }
+        .ao-label {
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            background: #eef3fc;
+            padding: 6px 14px;
+            border-radius: 40px;
+            text-align: center;
+            min-width: 65px;
+        }
+        .ao-electron-count {
+            font-size: 0.85rem;
+            font-weight: bold;
+            background: #e8f0fe;
+            padding: 4px 12px;
+            border-radius: 30px;
+            color: #1f4970;
+            min-width: 60px;
+            text-align: center;
+            font-family: monospace;
+        }
+        .orb {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto;
+            transition: all 0.1s;
+        }
+        .orb-s {
+            background: radial-gradient(circle at 35% 40%, #7ca9d4, #29648f);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .orb-s2 {
+            background: radial-gradient(circle at 40% 45%, #8bb5da, #2b6a97);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .orb-pz {
+            background: radial-gradient(ellipse at 50% 30%, #7ca9d4, #29648f);
+            border-radius: 50% 50% 45% 55% / 35% 35% 65% 65%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .orb-px {
+            background: radial-gradient(ellipse at 30% 50%, #8bb5da, #2b6a97);
+            border-radius: 40% 60% 60% 40% / 50% 45% 55% 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .orb-py {
+            background: radial-gradient(ellipse at 70% 50%, #8bb5da, #2b6a97);
+            border-radius: 60% 40% 40% 60% / 45% 50% 50% 55%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .orb.right {
+            background: radial-gradient(ellipse at 65% 55%, #9ac0e3, #3270a0);
+        }
+        .right.orb-s { background: radial-gradient(circle at 60% 40%, #9ac0e3, #3270a0); }
+        .right.orb-s2 { background: radial-gradient(circle at 55% 50%, #9ac0e3, #3270a0); }
+        .right.orb-pz { background: radial-gradient(ellipse at 50% 70%, #9ac0e3, #3270a0); }
+        .right.orb-px { background: radial-gradient(ellipse at 70% 50%, #9ac0e3, #3270a0); }
+        .right.orb-py { background: radial-gradient(ellipse at 30% 50%, #9ac0e3, #3270a0); }
+
+        .mo-row {
+            border-left: 6px solid;
+            justify-content: space-between;
+            padding-left: 12px;
+            padding-right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff;
+            border-radius: 40px;
+            min-height: 54px;
+        }
+        .bonding-mo { border-left-color: #2a7faa; }
+        .antibonding-mo { border-left-color: #c94f4f; }
+        .mo-label {
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            min-width: 85px;
+        }
+        .mo-electrons {
+            display: flex;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: #f0f4f9;
+            padding: 4px 18px;
+            border-radius: 48px;
+            box-shadow: inset 0 0 0 1px #cfdeed;
+        }
+        .spin-up { color: #1f6d1f; text-shadow: 0 0 1px #b1dfb1; }
+        .spin-down { color: #b33b3b; text-shadow: 0 0 1px #f0bebe; }
+        .empty-dots {
+            opacity: 0.4;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+        }
+        .energy-arrow-up {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #2c5a7a;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .info-footer {
+            margin-top: 25px;
+            background: #eaf0f7;
+            border-radius: 1.5rem;
+            padding: 12px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .metrics {
+            display: flex;
+            gap: 32px;
+            font-weight: bold;
+            background: white;
+            padding: 6px 24px;
+            border-radius: 60px;
+        }
+        .explanation {
+            max-width: 550px;
+            font-size: 0.85rem;
+            background: #ffffffcc;
+            padding: 6px 20px;
+            border-radius: 60px;
+            color: #02457a;
+        }
+        @keyframes fadeSlide {
+            0% { opacity: 0.6; transform: translateX(-2px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .mo-row, .ao-row { animation: fadeSlide 0.2s ease; }
+        @media (max-width: 1000px) {
+            .mo-container { padding: 1rem; }
+            .mo-electrons { font-size: 1.2rem; padding: 2px 10px; gap: 6px; }
+            .mo-label { font-size: 0.7rem; min-width: 70px; }
+            .orb { width: 42px; height: 42px; }
+        }
+    </style>
+</head>
+<body>
+<div class="mo-container">
+    <div class="header">
+        <h1>🔬 Molecular Orbital Diagram for Homoatomic Molecules (H₂ → F₂)</h1>
+        <div class="controls">
+            <select id="molSelect">
+                <option value="H2">H₂ (Hydrogen) · 2 valence e⁻</option>
+                <option value="He2">He₂ (Helium) · 4 valence e⁻</option>
+                <option value="Li2">Li₂ (Lithium) · 2 valence e⁻</option>
+                <option value="C2">C₂ (Carbon) · 8 valence e⁻</option>
+                <option value="N2">N₂ (Nitrogen) · 10 valence e⁻</option>
+                <option value="O2" selected>O₂ (Oxygen) · 12 valence e⁻ — Paramagnetic</option>
+                <option value="F2">F₂ (Fluorine) · 14 valence e⁻</option>
+            </select>
+            <button id="animateBtn">▶️ Fill Valence Electrons</button>
+            <div><span class="speed-label">⚡ Speed</span> <input type="range" id="speedSlider" min="250" max="1400" step="15" value="700"></div>
+        </div>
+    </div>
+
+    <div class="three-columns">
+        <div class="col">
+            <h3>⚛️ Atomic Orbitals (Atom A)</h3>
+            <div class="energy-arrow-up">▲ Energy ▲</div>
+            <div id="leftAOList" class="ao-list-reverse"></div>
+            <div class="connector-note" style="margin-top:12px; text-align:center; font-size:0.7rem;">Electrons fill degenerate p orbitals singly first</div>
+        </div>
+        <div class="col">
+            <h3>📊 Molecular Orbitals (σ / π / σ* / π*)</h3>
+            <div class="energy-arrow-up">▲ Increasing Energy ▲</div>
+            <div id="moListContainer" class="mo-list-reverse"></div>
+            <div class="energy-arrow-up" style="margin-top:5px;">▼ Lowest Valence MO: 2sσ<sub>g</sub> (or 1s for H₂) ▼</div>
+        </div>
+        <div class="col">
+            <h3>⚛️ Atomic Orbitals (Atom B)</h3>
+            <div class="energy-arrow-up">▲ Energy ▲</div>
+            <div id="rightAOList" class="ao-list-reverse"></div>
+            <div class="connector-note" style="margin-top:12px; text-align:center; font-size:0.7rem;">In‑phase → bonding | Out‑of‑phase → antibonding</div>
+        </div>
+    </div>
+
+    <div class="info-footer">
+        <div class="metrics">
+            <span>🔗 Bond Order: <strong id="bondOrderVal">—</strong></span>
+            <span>🧲 Magnetic: <strong id="magneticVal">—</strong></span>
+            <span>⚖️ Stability: <strong id="stabilityVal">—</strong></span>
+        </div>
+        <div id="explanationText" class="explanation">
+            💡 Valence electrons only. O₂ has 2 unpaired e⁻ in π* → paramagnetic.
+        </div>
+    </div>
+</div>
+
+<script>
+    // ------------------------------------------------------------------
+    // MOLECULAR ORBITAL DIAGRAM FOR HOMOATOMIC MOLECULES
+    // Valence electrons only — Core electrons (1s) omitted for clarity
+    // ------------------------------------------------------------------
+    
+    // Valence MO catalog
+    const moCatalog = {
+        '1sσ_g':   { label: '1sσ<sub>g</sub>', type: 'bonding', capacity: 2 },
+        '1sσ_u*':  { label: '1sσ<sub>u</sub>*', type: 'antibonding', capacity: 2 },
+        '2sσ_g':   { label: '2sσ<sub>g</sub>', type: 'bonding', capacity: 2 },
+        '2sσ_u*':  { label: '2sσ<sub>u</sub>*', type: 'antibonding', capacity: 2 },
+        '2pσ_g':   { label: '2pσ<sub>g</sub>', type: 'bonding', capacity: 2 },
+        '2pπ_u':   { label: '2pπ<sub>u</sub>', type: 'bonding', capacity: 4 },
+        '2pπ_g*':  { label: '2pπ<sub>g</sub>*', type: 'antibonding', capacity: 4 },
+        '2pσ_u*':  { label: '2pσ<sub>u</sub>*', type: 'antibonding', capacity: 2 }
+    };
+    
+    // Ordering for O₂, F₂ (Z ≥ 8): σ2p before π2p
+    const ORDER_HIGH_Z = ['2sσ_g', '2sσ_u*', '2pσ_g', '2pπ_u', '2pπ_g*', '2pσ_u*'];
+    // Ordering for C₂, N₂ (Z ≤ 7): π2p before σ2p
+    const ORDER_LOW_Z = ['2sσ_g', '2sσ_u*', '2pπ_u', '2pσ_g', '2pπ_g*', '2pσ_u*'];
+    // Ordering for Li₂: only 2s orbitals
+    const ORDER_LI2 = ['2sσ_g', '2sσ_u*'];
+    // Ordering for H₂, He₂: 1s orbitals
+    const ORDER_H2 = ['1sσ_g', '1sσ_u*'];
+    
+    // Molecule database
+    const moleculeDB = {
+        H2:  { name: 'H₂', valenceElectrons: 2,  order: ORDER_H2, desc: "H₂: 1sσ bond, diamagnetic, bond order 1." },
+        He2: { name: 'He₂', valenceElectrons: 4,  order: ORDER_H2, desc: "He₂: bond order 0, unstable, diamagnetic." },
+        Li2: { name: 'Li₂', valenceElectrons: 2,  order: ORDER_LI2, desc: "Li₂: 2sσ bond, diamagnetic, bond order 1." },
+        C2:  { name: 'C₂', valenceElectrons: 8,  order: ORDER_LOW_Z, desc: "C₂: double bond (π²), diamagnetic, bond order 2." },
+        N2:  { name: 'N₂', valenceElectrons: 10, order: ORDER_LOW_Z, desc: "N₂: triple bond (σ+2π), diamagnetic, bond order 3." },
+        O2:  { name: 'O₂', valenceElectrons: 12, order: ORDER_HIGH_Z, desc: "O₂: two unpaired π* electrons → paramagnetic, bond order 2." },
+        F2:  { name: 'F₂', valenceElectrons: 14, order: ORDER_HIGH_Z, desc: "F₂: single bond, diamagnetic, bond order 1." }
+    };
+    
+    // Current state
+    let currentMoleculeKey = 'O2';
+    let currentMOkeys = [];
+    let currentOccupancy = [];
+    let animationTimer = null;
+    let isAnimating = false;
+    let fillDelay = 700;
+    let currentValenceElectrons = 12;
+    
+    // DOM elements
+    const molSelect = document.getElementById('molSelect');
+    const animateBtn = document.getElementById('animateBtn');
+    const speedSlider = document.getElementById('speedSlider');
+    const moContainer = document.getElementById('moListContainer');
+    const leftAOContainer = document.getElementById('leftAOList');
+    const rightAOContainer = document.getElementById('rightAOList');
+    const bondOrderSpan = document.getElementById('bondOrderVal');
+    const magneticSpan = document.getElementById('magneticVal');
+    const stabilitySpan = document.getElementById('stabilityVal');
+    const explanationSpan = document.getElementById('explanationText');
+    
+    function resetOccupancy(keys) {
+        return keys.map(() => []);
+    }
+    
+    // Generate atomic orbital electron configuration (degenerate p orbitals fill singly first)
+    function getElectronDisplay(valenceCount) {
+        let sElectrons = Math.min(2, valenceCount);
+        let pElectrons = valenceCount - sElectrons;
+        
+        // Fill p orbitals singly first (one in each px, py, pz) before pairing
+        let pzCount = 0, pxCount = 0, pyCount = 0;
+        if (pElectrons <= 3) {
+            pzCount = (pElectrons >= 1) ? 1 : 0;
+            pxCount = (pElectrons >= 2) ? 1 : 0;
+            pyCount = (pElectrons >= 3) ? 1 : 0;
+        } else {
+            pzCount = 1;
+            pxCount = 1;
+            pyCount = 1;
+            let remaining = pElectrons - 3;
+            if (remaining >= 1) { pzCount = 2; remaining--; }
+            if (remaining >= 1) { pxCount = 2; remaining--; }
+            if (remaining >= 1) { pyCount = 2; }
+        }
+        
+        function electronSymbol(count) {
+            if (count === 0) return '◌ ◌';
+            if (count === 1) return '↑ ◌';
+            if (count === 2) return '↑↓';
+            return '↑↓';
+        }
+        
+        return { sElectrons, pzCount, pxCount, pyCount, electronSymbol };
+    }
+    
+    function renderAtomicOrbitals() {
+        let leftHtml = '', rightHtml = '';
+        
+        if (currentMoleculeKey === 'H2') {
+            leftHtml = `<div class="ao-row"><div class="orb orb-s"></div><div class="ao-label">1s</div><div class="ao-electron-count">↑</div></div>`;
+            rightHtml = `<div class="ao-row"><div class="orb right orb-s"></div><div class="ao-label">1s</div><div class="ao-electron-count">↑</div></div>`;
+        } else if (currentMoleculeKey === 'He2') {
+            leftHtml = `<div class="ao-row"><div class="orb orb-s"></div><div class="ao-label">1s</div><div class="ao-electron-count">↑↓</div></div>`;
+            rightHtml = `<div class="ao-row"><div class="orb right orb-s"></div><div class="ao-label">1s</div><div class="ao-electron-count">↑↓</div></div>`;
+        } else if (currentMoleculeKey === 'Li2') {
+            leftHtml = `<div class="ao-row"><div class="orb orb-s2"></div><div class="ao-label">2s</div><div class="ao-electron-count">↑</div></div>`;
+            rightHtml = `<div class="ao-row"><div class="orb right orb-s2"></div><div class="ao-label">2s</div><div class="ao-electron-count">↑</div></div>`;
+        } else {
+            const valenceCount = moleculeDB[currentMoleculeKey].valenceElectrons / 2;
+            const { sElectrons, pzCount, pxCount, pyCount, electronSymbol } = getElectronDisplay(valenceCount);
+            
+            leftHtml = `
+                <div class="ao-row"><div class="orb orb-s2"></div><div class="ao-label">2s</div><div class="ao-electron-count">${electronSymbol(sElectrons)}</div></div>
+                <div class="ao-row"><div class="orb orb-pz"></div><div class="ao-label">2pz</div><div class="ao-electron-count">${electronSymbol(pzCount)}</div></div>
+                <div class="ao-row"><div class="orb orb-px"></div><div class="ao-label">2px</div><div class="ao-electron-count">${electronSymbol(pxCount)}</div></div>
+                <div class="ao-row"><div class="orb orb-py"></div><div class="ao-label">2py</div><div class="ao-electron-count">${electronSymbol(pyCount)}</div></div>
+            `;
+            rightHtml = `
+                <div class="ao-row"><div class="orb right orb-s2"></div><div class="ao-label">2s</div><div class="ao-electron-count">${electronSymbol(sElectrons)}</div></div>
+                <div class="ao-row"><div class="orb right orb-pz"></div><div class="ao-label">2pz</div><div class="ao-electron-count">${electronSymbol(pzCount)}</div></div>
+                <div class="ao-row"><div class="orb right orb-px"></div><div class="ao-label">2px</div><div class="ao-electron-count">${electronSymbol(pxCount)}</div></div>
+                <div class="ao-row"><div class="orb right orb-py"></div><div class="ao-label">2py</div><div class="ao-electron-count">${electronSymbol(pyCount)}</div></div>
+            `;
+        }
+        
+        leftAOContainer.innerHTML = leftHtml;
+        rightAOContainer.innerHTML = rightHtml;
+    }
+    
+    function computeProperties(keys, occ) {
+        let bonding = 0, antibonding = 0;
+        let unpaired = 0;
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const mo = moCatalog[key];
+            if (!mo) continue;
+            const isAnti = (mo.type === 'antibonding');
+            const eCount = occ[i].length;
+            if (isAnti) antibonding += eCount;
+            else bonding += eCount;
+            if (eCount === 1) unpaired++;
+            else if (eCount === 2 && occ[i][0].spin === occ[i][1].spin) unpaired += 2;
+        }
+        const bondOrder = (bonding - antibonding) / 2;
+        const magnetic = (unpaired > 0) ? 'Paramagnetic 🔴' : 'Diamagnetic ⚪';
+        let stability = bondOrder >= 1.5 ? 'Stable ✅' : (bondOrder >= 0.8 ? 'Stable' : 'Unstable ❌');
+        if (bondOrder <= 0.2) stability = 'Unstable ❌';
+        return { bondOrder: bondOrder.toFixed(2), magnetic, stability, unpaired };
+    }
+    
+    function addElectronStep(keys, occ, maxElectrons) {
+        let newOcc = occ.map(arr => [...arr]);
+        let totalNow = newOcc.reduce((s, a) => s + a.length, 0);
+        if (totalNow >= maxElectrons) return { done: true, occupancy: newOcc };
+        
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const mo = moCatalog[key];
+            if (!mo) continue;
+            const cap = mo.capacity;
+            if (newOcc[i].length < cap) {
+                let newSpin = 'up';
+                const isPi = (key === '2pπ_u' || key === '2pπ_g*');
+                // For π orbitals, electrons fill singly with parallel spins first
+                if (isPi && newOcc[i].length === 1) newSpin = 'up';
+                else if (isPi && newOcc[i].length === 2) newSpin = 'down';
+                else if (isPi && newOcc[i].length === 3) newSpin = (newOcc[i][0].spin === 'up') ? 'down' : 'up';
+                else if (!isPi && newOcc[i].length === 1) newSpin = (newOcc[i][0].spin === 'up') ? 'down' : 'up';
+                if (newOcc[i].length === 0) newSpin = 'up';
+                newOcc[i].push({ spin: newSpin });
+                break;
+            }
+        }
+        return { done: false, occupancy: newOcc };
+    }
+    
+    function renderMolecularOrbitals() {
+        let moHtml = '';
+        for (let idx = 0; idx < currentMOkeys.length; idx++) {
+            const key = currentMOkeys[idx];
+            const mo = moCatalog[key];
+            if (!mo) continue;
+            const electronsArr = currentOccupancy[idx] || [];
+            const isBonding = mo.type === 'bonding';
+            const rowClass = isBonding ? 'bonding-mo' : 'antibonding-mo';
+            const cap = mo.capacity;
+            let electronDisplay = '';
+            if (electronsArr.length === 0) {
+                let emptyStr = cap === 4 ? '◌ ◌ ◌ ◌' : '◌ ◌';
+                electronDisplay = `<div class="mo-electrons empty-dots">${emptyStr}</div>`;
+            } else {
+                let spinsHtml = electronsArr.map(e => `<span class="${e.spin === 'up' ? 'spin-up' : 'spin-down'}">${e.spin === 'up' ? '↑' : '↓'}</span>`).join('');
+                let missing = cap - electronsArr.length;
+                let placeholderHtml = missing ? `<span style="opacity:0.4;">${' ◌'.repeat(missing)}</span>` : '';
+                electronDisplay = `<div class="mo-electrons">${spinsHtml}${placeholderHtml}</div>`;
+            }
+            moHtml += `
+                <div class="mo-row ${rowClass}">
+                    <span class="mo-label">${mo.label}</span>
+                    ${electronDisplay}
+                </div>
+            `;
+        }
+        moContainer.innerHTML = moHtml;
+        
+        const props = computeProperties(currentMOkeys, currentOccupancy);
+        bondOrderSpan.innerText = props.bondOrder;
+        magneticSpan.innerText = props.magnetic;
+        stabilitySpan.innerText = props.stability;
+        
+        let desc = moleculeDB[currentMoleculeKey]?.desc || `Bond order ${props.bondOrder}, ${props.magnetic.toLowerCase()}.`;
+        explanationSpan.innerHTML = `💡 ${desc} &nbsp;|&nbsp; 📈 Energy increases upward.`;
+    }
+    
+    function renderFull() {
+        renderAtomicOrbitals();
+        renderMolecularOrbitals();
+    }
+    
+    function stepAnimation() {
+        if (!isAnimating) return;
+        const { done, occupancy } = addElectronStep(currentMOkeys, currentOccupancy, currentValenceElectrons);
+        if (done) {
+            isAnimating = false;
+            if (animationTimer) clearInterval(animationTimer);
+            animationTimer = null;
+            animateBtn.innerHTML = '▶️ Fill Valence Electrons';
+            renderFull();
+            return;
+        }
+        currentOccupancy = occupancy;
+        renderFull();
+    }
+    
+    function startAnimation() {
+        if (animationTimer) clearInterval(animationTimer);
+        isAnimating = true;
+        animationTimer = setInterval(() => stepAnimation(), fillDelay);
+        animateBtn.innerHTML = '⏸️ Pause';
+    }
+    
+    function stopAnimation() {
+        if (animationTimer) {
+            clearInterval(animationTimer);
+            animationTimer = null;
+        }
+        isAnimating = false;
+        animateBtn.innerHTML = '▶️ Fill Valence Electrons';
+    }
+    
+    function toggleAnimation() {
+        if (isAnimating) {
+            stopAnimation();
+        } else {
+            let total = currentOccupancy.reduce((s, o) => s + o.length, 0);
+            if (total >= currentValenceElectrons) {
+                currentOccupancy = resetOccupancy(currentMOkeys);
+                renderFull();
+            }
+            startAnimation();
+        }
+    }
+    
+    function loadMolecule(molKey) {
+        stopAnimation();
+        const data = moleculeDB[molKey];
+        if (data) {
+            currentMoleculeKey = molKey;
+            currentMOkeys = [...data.order];
+            currentValenceElectrons = data.valenceElectrons;
+            currentOccupancy = resetOccupancy(currentMOkeys);
+            renderFull();
+        }
+    }
+    
+    // Event listeners
+    molSelect.addEventListener('change', (e) => { loadMolecule(e.target.value); });
+    animateBtn.addEventListener('click', toggleAnimation);
+    speedSlider.addEventListener('input', () => {
+        fillDelay = parseInt(speedSlider.value);
+        if (isAnimating) {
+            stopAnimation();
+            startAnimation();
+        }
+    });
+    
+    // Initialize with O₂
+    loadMolecule('O2');
+</script>
+</body>
+</html>
