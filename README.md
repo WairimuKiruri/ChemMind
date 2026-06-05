@@ -1,6 +1,6 @@
 # ChemMind
 
-##Vist Here for a scientific experience https://wairimukiruri.github.io/ChemMind/
+### Vist Here for a scientific experience https://wairimukiruri.github.io/ChemMind/
 <img width="1509" height="775" alt="image" src="https://github.com/user-attachments/assets/6aa8c6e4-60ee-49e3-8250-1b741a7120c0" />
 
 
